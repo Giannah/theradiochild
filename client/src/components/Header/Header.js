@@ -14,7 +14,7 @@ class Header extends Component {
       >
         <div className='identity'>
           <h1>
-        The TV child
+        The TV Child
             <img id="logo" src={Logo} alt="app-logo" />
           </h1>
         </div>

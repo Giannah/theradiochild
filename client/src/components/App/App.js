@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-import { ThemeContext, themes } from './theme'
-import Header from './components/Header/Header'
+import { ThemeContext, themes } from '../../theme'
+import Header from '../Header/Header'
 
 class App extends Component {
   constructor (props) {
