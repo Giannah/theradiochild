@@ -16,6 +16,7 @@ describe('Header', () => {
   })
 
   it('has 2 sections', () => {
-    expect(header.children()).toHaveLength(2)
+    expect(header.children().find('.identity')).toBeDefined()
+    expect(header.children().find('.header-end')).toBeDefined()
   })
 })

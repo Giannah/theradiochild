@@ -1,36 +1,24 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import MainContainer from '../MainContainer/MainContainer'
+import Login from '../Login/Login'
 
-import { ThemeContext, themes } from '../../theme'
-import Header from '../Header/Header'
-
-class App extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      theme: themes.dark
-    }
-
-    this.switchTheme = this.switchTheme.bind(this)
-  }
-
-  switchTheme () {
-    this.setState(state => ({
-      theme: state.theme === themes.dark ? themes.light : themes.dark
-    }))
-  }
-
-  render () {
-    return (
-      <div className="App">
-        <ThemeContext.Provider value={this.state.theme}>
-          <Header
-            onThemeSwitch={this.switchTheme}
+const App = () => (
+  <Router>
+    <div className="App">
+      <Switch>
+        <Route path='/home' component={MainContainer}/>
+        <Route exact path='/' render={() => (
+          <Redirect
+            to='/home'
           />
-        </ThemeContext.Provider>
-      </div>
-    )
-  }
-}
+        )} />
+        <Route path='/login' component={Login}/>
+      </Switch>
+
+    </div>
+  </Router>
+
+)
 
 export default App

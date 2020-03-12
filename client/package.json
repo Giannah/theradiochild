@@ -10,6 +10,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "sass-loader": "^8.0.2"
   },
@@ -68,7 +69,7 @@
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "npm run lint",
-      "pre-push": "npm run test:push"
+      "pre-push": "npm run lint && npm run test:push"
     }
   }
 }
