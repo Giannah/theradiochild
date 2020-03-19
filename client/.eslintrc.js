@@ -7,7 +7,8 @@ module.exports = {
   parser: 'babel-eslint',
   extends: [
     'plugin:react/recommended',
-    'standard'
+    'standard', 
+    'prettier'
   ],
   globals: {
     Atomics: 'readonly',
@@ -24,5 +25,6 @@ module.exports = {
     'react'
   ],
   rules: {
+    "max-len": ["error", {"code": 100}],
   }
 }
