@@ -39,9 +39,6 @@
     ]
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
-    "commitizen": "^4.0.3",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.4.4",
@@ -52,31 +49,6 @@
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.18.3",
-    "eslint-plugin-standard": "^4.0.1",
-    "husky": "^4.2.3",
-    "lint-staged": "^10.0.8",
-    "pretty-quick": "^2.0.1"
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-customizable"
-    },
-    "cz-customizable": {
-      "config": "cz-config.js"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "npm run lint && lint-staged",
-      "pre-push": "npm run lint && npm run test:push"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx}": [
-      "eslint",
-      "pretty-quick -staged"
-    ]
+    "eslint-plugin-standard": "^4.0.1"
   }
 }

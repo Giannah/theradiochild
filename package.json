@@ -5,7 +5,10 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "lint": "eslint ."
+    "precommit": "npm run lint && lint-staged",
+    "prepush": "npm run lint && npm run test",
+    "lint": "cd client && npm run lint",
+    "test": "cd client && npm run test:push"
   },
   "repository": {
     "type": "git",
@@ -47,6 +50,9 @@
     "@babel/plugin-transform-modules-commonjs": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
     "@babel/register": "^7.9.0",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "commitizen": "^4.0.3",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-config-standard": "^14.1.1",
@@ -59,5 +65,27 @@
     "lint-staged": "^10.0.8",
     "prettier": "^1.19.1",
     "pretty-quick": "^2.0.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": "cz-config.js"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "npm run precommit",
+      "pre-push": "npm run prepush"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint",
+      "pretty-quick -staged"
+    ]
   }
 }
