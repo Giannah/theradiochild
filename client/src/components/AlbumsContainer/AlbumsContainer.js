@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import { ThemeContext, themes } from '../../theme'
 import { Route } from 'react-router-dom'
-import Album from '../Album'
+import Album from '../Album/Album'
 import VerticalMenu from '../VerticalMenu/VerticalMenu'
 import { client } from '../../Client'
 import PropTypes from 'prop-types'
