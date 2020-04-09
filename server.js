@@ -1,7 +1,7 @@
 import express from 'express'
 import morgan from 'morgan'
 
-import SpotifyClient from './SpotifyClient'
+import SpotifyClient from './SpotifyClient.js'
 
 const app = express()
 

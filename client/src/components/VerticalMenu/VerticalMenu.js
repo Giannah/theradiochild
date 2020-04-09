@@ -1,6 +1,6 @@
 import React from 'react'
 import { ThemeContext } from '../../theme'
-import { NavLlink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 const VerticalMenu = ({ albums, albumsPathname }) => (
@@ -14,9 +14,9 @@ const VerticalMenu = ({ albums, albumsPathname }) => (
           Albums
         </div>
         {albums.map(album => (
-          <NavLlink to={`${albumsPathname}/${album.id}`} activeClassName="item" key={album.id}>
+          <NavLink to={`${albumsPathname}/${album.id}`} activeClassName="item" key={album.id}>
             {album.name}
-          </NavLlink>
+          </NavLink>
         ))}
       </div>
     )}
