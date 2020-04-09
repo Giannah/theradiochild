@@ -26,7 +26,7 @@ module.exports = {
     { value: 'WIP', name: 'WIP:      Work in progress' },
   ],
 
-  scopes: [{ name: 'accounts' }, { name: 'admin' }, { name: 'exampleScope' }, { name: 'changeMe' }],
+  scopes: [{ name: 'accounts' }, { name: 'admin' }, { name: 'home' }, { name: 'albums' }],
 
   allowTicketNumber: false,
   isTicketNumberRequired: false,
@@ -34,16 +34,11 @@ module.exports = {
   ticketNumberRegExp: '\\d{1,5}',
 
   // it needs to match the value for field type. Eg.: 'fix'
-  /*
-    scopeOverrides: {
-      fix: [
-        {name: 'merge'},
-        {name: 'style'},
-        {name: 'e2eTest'},
-        {name: 'unitTest'}
-      ]
-    },
-    */
+
+  scopeOverrides: {
+    fix: [{ name: 'merge' }, { name: 'style' }, { name: 'e2eTest' }, { name: 'unitTest' }],
+  },
+
   // override the messages, defaults are as follows
   messages: {
     type: "Select the type of change that you're committing:",
