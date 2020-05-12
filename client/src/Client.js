@@ -1,22 +1,22 @@
 import fetch from 'isomorphic-fetch'
 
-let API_KEY
+const SESSION_STORAGE_KEY = 'fsr-spotify-fake-auth'
 
-export default class Client {
+class Client {
   constructor() {
     this.useSessionStorage = typeof sessionStorage !== 'undefined'
-    this.suscribers = []
+    this.subscribers = []
 
     if (this.useSessionStorage) {
-      this.token = sessionStorage.getItem(API_KEY)
-    }
+      this.token = sessionStorage.getItem(SESSION_STORAGE_KEY)
 
-    if (this.token) {
-      this.isTokenValid().then(bool => {
-        if (!bool) {
-          this.token = null
-        }
-      })
+      if (this.token) {
+        this.isTokenValid().then(bool => {
+          if (!bool) {
+            this.token = null
+          }
+        })
+      }
     }
   }
 
@@ -25,18 +25,18 @@ export default class Client {
   }
 
   suscribe(cb) {
-    this.suscribers.push(cb)
+    this.subscribers.push(cb)
   }
 
-  notifySuscribers() {
-    this.suscribers.forEach(cb => cb(this.isLoggedIn()))
+  notifySubscribers() {
+    this.subscribers.forEach(cb => cb(this.isLoggedIn()))
   }
 
   setToken(token) {
     this.token = token
 
     if (this.useSessionStorage) {
-      sessionStorage.setItem(API_KEY, token)
+      sessionStorage.setItem(SESSION_STORAGE_KEY, token)
     }
   }
 
@@ -44,7 +44,7 @@ export default class Client {
     this.token = null
 
     if (this.useSessionStorage) {
-      sessionStorage.removeItem(API_KEY)
+      sessionStorage.removeItem(SESSION_STORAGE_KEY)
     }
   }
 
@@ -58,28 +58,10 @@ export default class Client {
     })
       .then(this.checkStatus)
       .then(this.parseJson)
-      .then(json => json.valid === true)
-  }
-
-  getAlbum(albumId) {
-    return this.getAlbums([albumId], albums => albums[0])
-  }
-
-  getAlbums(albumIds) {
-    const url = '/api/albums?ids=' + albumIds.join(',') + '&token=' + this.token
-
-    return fetch(url, {
-      method: 'get',
-      headers: {
-        accept: 'application/json',
-      },
-    })
-      .then(this.checkStatus)
-      .then(this.parseJson)
   }
 
   login() {
-    return fetch('/api/login', {
+    return fetch('api/login', {
       method: 'post',
       headers: {
         accept: 'application/json',

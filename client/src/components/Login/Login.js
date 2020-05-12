@@ -54,7 +54,7 @@ class Login extends Component {
 
 Login.propTypes = {
   location: PropTypes.shape({
-    state: PropTypes.string,
+    state: PropTypes.object,
     from: PropTypes.string,
     pathname: PropTypes.string,
   }).isRequired,
