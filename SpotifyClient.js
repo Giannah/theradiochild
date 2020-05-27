@@ -3,8 +3,8 @@ import URI from 'urijs'
 import camelcaseKeys from 'camelcase-keys'
 import btoa from 'btoa'
 
-const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID
-const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET
+const SPOTIFY_CLIENT_ID = '73e3316736554b098e660e988236e877'
+const SPOTIFY_CLIENT_SECRET = '13fe0d18b6434bd4ade1f4626f3d21eb'
 const BASE64_ENCODED_SPOTIFY_CREDENTIALS = btoa(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`)
 
 const getFirstImageUrl = images => images && images[0] && images[0].url
@@ -105,21 +105,21 @@ const SpotifyClient = {
   },
 
   getAlbum(albumId) {
-    return this._get(SPOTIFY_BASE_URI + '/albums/' + albumId).then(data => parseAlbum(data))
+    return this._get(`${SPOTIFY_BASE_URI}/albums/${albumId}`).then(data => parseAlbum(data))
   },
 
   getAlbums(albumIds) {
-    return this._get(SPOTIFY_BASE_URI + '/albums?ids=' + albumIds.join(',')).then(data =>
+    return this._get(`${SPOTIFY_BASE_URI}/albums?ids=${albumIds.join(',')}`).then(data =>
       data.albums.map(a => parseAlbum(a)),
     )
   },
 
   getArtist(artistId) {
-    return this._get(SPOTIFY_BASE_URI + 'artists/' + artistId).then(data => parseArtist(data))
+    return this._get(`${SPOTIFY_BASE_URI}/artists/${artistId}`).then(data => parseArtist(data))
   },
 
   getArtistTopTracks(artistId) {
-    const url = URI(SPOTIFY_BASE_URI + 'artists/' + artistId + '/top-tracks').query({
+    const url = URI(`${SPOTIFY_BASE_URI}/artists/${artistId}/top-tracks`).query({
       country: 'fr',
     })
 
@@ -127,7 +127,7 @@ const SpotifyClient = {
   },
 
   getArtistAlbums(artistId) {
-    const url = SPOTIFY_BASE_URI + '/artists/' + artistId + '/albums?album_type=album'
+    const url = `${SPOTIFY_BASE_URI}/artists/${artistId}/albums?album_type=album`
 
     return this._get(url).then(data => data.items.map(a => parseAlbum(a)))
   },

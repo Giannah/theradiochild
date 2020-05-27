@@ -1,5 +1,6 @@
 import express from 'express'
 import morgan from 'morgan'
+import cors from 'cors'
 
 import SpotifyClient from './SpotifyClient.js'
 
@@ -8,7 +9,14 @@ const app = express()
 app.set('port', process.env.API_PORT || 3001)
 
 if (process.env.NODE_ENV !== 'TEST') {
+  app.use(cors())
   app.use(morgan('combined'))
+  app.use((req, res, next) => {
+    res.header('Acces-Control-Allow-Origin', '*')
+    res.header('Acces-Control-Allow-Headers', '*')
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS, DELETE')
+    next()
+  })
 }
 
 export const API_TOKEN = 'aNALFhaMBaLpITaYwCoMOlWOrEreaUThNiTnEUgH'

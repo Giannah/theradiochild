@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import { ThemeContext, themes } from '../../theme'
 import { Route } from 'react-router-dom'
 import Album from '../Album/Album'
 import VerticalMenu from '../VerticalMenu/VerticalMenu'
@@ -29,7 +28,7 @@ class AlbumsContainer extends Component {
   }
 
   getAlbums = () => {
-    client.getAlbum(ALBUM_IDS).then(albums =>
+    client.getAlbums(ALBUM_IDS).then(albums =>
       this.setState({
         fetched: true,
         albums: albums,
@@ -38,12 +37,12 @@ class AlbumsContainer extends Component {
   }
 
   render() {
-    const fetched = this.state
+    console.log(this.state)
+    const { fetched, albums } = this.state
+    const matchPath = this.props.match.path
     if (!fetched) {
       return <div className="ui active centered inline loader" />
     } else {
-      const matchPath = this.props.match.path
-      const albums = this.state
       return (
         <div className="ui two column divided grid">
           <div className="ui six wide column" style={{ maxWidth: 250 }}>
@@ -65,7 +64,7 @@ class AlbumsContainer extends Component {
 }
 
 AlbumsContainer.propTypes = {
-  match: PropTypes.func,
+  match: PropTypes.object,
   path: PropTypes.string,
 }
 

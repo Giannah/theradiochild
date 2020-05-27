@@ -24,7 +24,7 @@ class Client {
     return !!this.token
   }
 
-  suscribe(cb) {
+  subscribe(cb) {
     this.subscribers.push(cb)
   }
 
@@ -58,10 +58,28 @@ class Client {
     })
       .then(this.checkStatus)
       .then(this.parseJson)
+      .then(json => json.valid === true)
+  }
+
+  getAlbum(albumId) {
+    return this.getAlbums([albumId], albums => albums[0])
+  }
+
+  getAlbums(albumIds) {
+    const url = '/api/albums?ids=' + albumIds.join(',') + '&token=' + this.token
+    return fetch(url, {
+      method: 'get',
+      headers: {
+        accept: 'application/json',
+      },
+    })
+      .then(this.checkStatus)
+      .then(this.parseJson)
+      .catch(error => console.log(error))
   }
 
   login() {
-    return fetch('api/login', {
+    return fetch('/api/login', {
       method: 'post',
       headers: {
         accept: 'application/json',
@@ -70,6 +88,7 @@ class Client {
       .then(this.checkStatus)
       .then(this.parseJson)
       .then(json => this.setToken(json.token))
+      .catch(error => console.log(error))
   }
 
   logout() {

@@ -7,12 +7,23 @@ import { client } from '../../Client'
 import PropTypes from 'prop-types'
 
 class Login extends Component {
-  state = {
-    loginInProgress: false,
-    shouldredirect: false,
+  // state = {
+  //   loginInProgress: false,
+  //   shouldredirect: false,
+  // }
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      loginInProgress: false,
+      shouldredirect: false,
+    }
+
+    this.performLogic = this.performLogic.bind(this)
   }
 
-  performLogic = () => {
+  performLogic() {
     this.setState({ loginInProgress: true })
     client.login().then(() => this.setState({ shouldredirect: true }))
   }
