@@ -3,9 +3,9 @@ import URI from 'urijs'
 import camelcaseKeys from 'camelcase-keys'
 import btoa from 'btoa'
 
-const SPOTIFY_CLIENT_ID = '73e3316736554b098e660e988236e877'
-const SPOTIFY_CLIENT_SECRET = '13fe0d18b6434bd4ade1f4626f3d21eb'
-const BASE64_ENCODED_SPOTIFY_CREDENTIALS = btoa(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`)
+const BASE_64_ENCODED_SPOTIFY_CREDENTIALS = btoa(
+  `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`,
+)
 
 const getFirstImageUrl = images => images && images[0] && images[0].url
 
@@ -94,7 +94,7 @@ const SpotifyClient = {
       method: 'post',
       body: 'grant_type=client_credentials',
       headers: {
-        Authorization: `Basic ${BASE64_ENCODED_SPOTIFY_CREDENTIALS}`,
+        Authorization: `Basic ${BASE_64_ENCODED_SPOTIFY_CREDENTIALS}`,
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     })
