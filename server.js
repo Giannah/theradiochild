@@ -19,9 +19,11 @@ if (process.env.NODE_ENV !== 'TEST') {
   })
 }
 
-export const API_TOKEN = 'aNALFhaMBaLpITaYwCoMOlWOrEreaUThNiTnEUgH'
+const API_TOKEN = process.env.API_TOKEN
 
-const extractToken = req => req.query.token
+function extractToken(req) {
+  return req.query.token
+}
 
 const authenticatedRoute = (req, res, next) => {
   const token = extractToken(req)

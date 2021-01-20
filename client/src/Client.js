@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch'
 
-const SESSION_STORAGE_KEY = 'fsr-spotify-fake-auth'
+const SESSION_STORAGE_KEY = process.env.SESSION_STORAGE_KEY
 
 class Client {
   constructor() {
